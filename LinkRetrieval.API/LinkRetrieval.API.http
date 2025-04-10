@@ -1,0 +1,6 @@
+@LinkRetrieval.API_HostAddress = http://localhost:5084
+
+GET {{LinkRetrieval.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

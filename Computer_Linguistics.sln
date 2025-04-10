@@ -5,6 +5,10 @@ VisualStudioVersion = 17.12.35527.113 d17.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Course_Project", "Course_Project\Course_Project.csproj", "{6826EF14-83FE-4CA4-A54C-FCAA24F99886}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkRetrieval.API", "LinkRetrieval.API\LinkRetrieval.API.csproj", "{775F8575-8B7B-4F93-8071-5AFED20DD327}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkRetrieval.Data", "LinkRetrieval.Data\LinkRetrieval.Data.csproj", "{3C8509D5-0BF1-469B-B3F2-F0C198B7A145}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{6826EF14-83FE-4CA4-A54C-FCAA24F99886}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6826EF14-83FE-4CA4-A54C-FCAA24F99886}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6826EF14-83FE-4CA4-A54C-FCAA24F99886}.Release|Any CPU.Build.0 = Release|Any CPU
+		{775F8575-8B7B-4F93-8071-5AFED20DD327}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{775F8575-8B7B-4F93-8071-5AFED20DD327}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{775F8575-8B7B-4F93-8071-5AFED20DD327}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{775F8575-8B7B-4F93-8071-5AFED20DD327}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C8509D5-0BF1-469B-B3F2-F0C198B7A145}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C8509D5-0BF1-469B-B3F2-F0C198B7A145}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C8509D5-0BF1-469B-B3F2-F0C198B7A145}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C8509D5-0BF1-469B-B3F2-F0C198B7A145}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
