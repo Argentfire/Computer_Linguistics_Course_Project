@@ -1,0 +1,15 @@
+<div class="search-form">
+  <section id="section-form" class="search-form-section">
+      <label>Please enter a URL address:</label>
+      <input id="url-input-field" class="input-field" type="text" [(ngModel)]="urlAddress">
+
+      <label>Please enter a regular expression:</label>
+      <input id="regex-input-field" class="input-field" type="text" [(ngModel)]="regexPattern">
+    <button mat-stroked-button (click)="sendSearchRequest()">Send Request</button>
+  </section>
+
+  <section id="section-result" class="search-form-section" [hidden]="!resultVisible">
+    <h1>Result:</h1>
+  </section>
+
+</div>
