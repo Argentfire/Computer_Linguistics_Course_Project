@@ -41,6 +41,17 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     sqlOptions.EnableRetryOnFailure();
   });
 });
+builder.Services.AddCors(option =>
+{
+  option.AddDefaultPolicy(builder =>
+  {
+    builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+  });
+  option.AddPolicy("AllowAll", policy =>
+  {
+    policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+  });
+});
 //builder.Services.AddDbContext<ApplicationDbContext>(opt =>
 //{
 //  opt.UseSqlServer(connectionString,
@@ -49,6 +60,14 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 //    sqlOptions.EnableRetryOnFailure();
 //  });
 //});
+builder.WebHost.ConfigureKestrel(serverOptions =>
+{
+  serverOptions.ListenAnyIP(5084); // HTTP for fallback/testing
+  serverOptions.ListenAnyIP(7009, listenOptions =>
+  {
+    listenOptions.UseHttps();
+  });
+});
 
 var app = builder.Build();
 
@@ -56,6 +75,8 @@ var app = builder.Build();
 app.UseSwagger();
 app.UseSwaggerUI();
 app.UseRouting();
+
+app.UseCors("AllowAll");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
