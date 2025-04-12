@@ -1,6 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-using System.Text.RegularExpressions;
-using System.Web;
+﻿using System.Text.RegularExpressions;
 
 
 namespace Course_Project
@@ -31,7 +29,7 @@ namespace Course_Project
 
           Console.WriteLine("Please enter a regular expression pattern to search in the site:");
           var pattern = Console.ReadLine();
-          if(!string.IsNullOrEmpty(pattern))
+          if (!string.IsNullOrEmpty(pattern))
           {
             RegExPattern = pattern;
           }
