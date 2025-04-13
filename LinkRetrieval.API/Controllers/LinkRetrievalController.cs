@@ -103,7 +103,7 @@ namespace LinkRetrieval.API.Controllers
         Url = searchRequest.Url,
         RegexPattern = searchRequest.RegexPattern,
         HtmlContent = htmlContent,
-        SearchTime = DateTime.UtcNow,
+        SearchTime = DateTime.Now,
         MatchResults = matchResults
       };
 
