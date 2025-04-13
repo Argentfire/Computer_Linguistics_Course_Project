@@ -10,14 +10,17 @@ import { AngularMaterialModule } from './@modules/angular-material.module';
 import { CommonModule } from '@angular/common';
 import { NavigationComponent } from './@components/navigation/navigation.component';
 import { SearchFormComponent } from './@components/search-form/search-form.component';
-
+import { SearchHistoryComponent } from './@components/search-history/search-history.component';
+import { SearchResultViewComponent } from './@components/search-result-view/search-result-view.component';
 
 @NgModule({
   bootstrap: [AppComponent],
   declarations: [
     AppComponent,
     NavigationComponent,
-    SearchFormComponent
+    SearchFormComponent,
+    SearchHistoryComponent,
+    SearchResultViewComponent
   ],
   imports: [
     AppRoutingModule,
@@ -26,8 +29,8 @@ import { SearchFormComponent } from './@components/search-form/search-form.compo
     BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [],
 })
-export class AppModule { }
+export class AppModule {}
