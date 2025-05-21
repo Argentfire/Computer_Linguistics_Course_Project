@@ -15,19 +15,27 @@ import { SearchFormService } from './search-form.service';
 export class SearchFormComponent {
   public urlAddress: string;
   public regexPattern: string;
+  public searchDepth: number;
+  public warningAccepted: boolean;
 
   resultVisible: boolean = false;
 
   constructor(private searchService: SearchFormService) {
     this.urlAddress = 'https://arenabg.com';
     this.regexPattern = `\\b((https?:\\/\\/|www\\.)[^\\s<>\"']+)`;
+    this.searchDepth = 1;
+    this.warningAccepted = false;
   }
 
   sendSearchRequest(): void {
-    const searchRequest = new SearchRequest(this.urlAddress, this.regexPattern);
+    const searchRequest = new SearchRequest(this.urlAddress, this.regexPattern, this.searchDepth);
     this.searchService.searchPageForURLs(searchRequest).subscribe((data) => {
-      debugger;
     });
-    debugger;
+  }
+
+  setDepthLevel(event: any): void {
+    if (this.searchDepth < 1) {
+      this.searchDepth = 1;
+    }
   }
 }

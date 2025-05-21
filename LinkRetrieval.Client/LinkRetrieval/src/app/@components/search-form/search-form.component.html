@@ -1,10 +1,21 @@
 <div class="search-form">
   <section id="section-form" class="search-form-section">
-      <label>Please enter a URL address:</label>
-      <input id="url-input-field" class="input-field" type="text" [(ngModel)]="urlAddress">
+    <label>Please enter a URL address:</label>
+    <input id="url-input-field" class="input-field" type="text" [(ngModel)]="urlAddress">
 
-      <label>Please enter a regular expression:</label>
-      <input id="regex-input-field" class="input-field" type="text" [(ngModel)]="regexPattern">
+    <label>Please enter a regular expression:</label>
+    <input id="regex-input-field" class="input-field" type="text" [(ngModel)]="regexPattern">
+
+    <label>Please enter search depth level:</label>
+    <input id="search-input-field" class="input-field" type="number" [(ngModel)]="searchDepth" min="1"
+      (input)="setDepthLevel($event)" [disabled]="!warningAccepted">
+    <div>
+      <label id="warning-checkbox-label" for="warning-checkbox-input">Warning: Search depth level will affect the speed of the process.<br>
+        Please be advised when searching at deeper levels.<br>
+        (Refrain yourself from searching at depth level deeper than 3)</label><br>
+      <input id="warning-checkbox-input" type="checkbox" [(ngModel)]="warningAccepted">
+      <label id="warning-checkbox-label" for="warning-checkbox-input">I accept the warning</label>
+    </div>
     <button mat-stroked-button (click)="sendSearchRequest()">Send Request</button>
   </section>
 
