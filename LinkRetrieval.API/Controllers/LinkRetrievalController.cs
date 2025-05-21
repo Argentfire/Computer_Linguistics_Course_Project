@@ -2,7 +2,6 @@
 using LinkRetrieval.Core.Contracts;
 using LinkRetrieval.Data.DB;
 using LinkRetrieval.Data.Models.Classes;
-using LinkRetrieval.Data.Models.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.RegularExpressions;
 
@@ -88,7 +87,7 @@ namespace LinkRetrieval.API.Controllers
 
       var matches = regex.Matches(htmlContent);
       var matchResults = new List<MatchResult>();
-      foreach(Match match in matches)
+      foreach (Match match in matches)
       {
         matchResults.Add(new MatchResult
         {
@@ -111,7 +110,7 @@ namespace LinkRetrieval.API.Controllers
       {
         await _searchService.CreateSearchAsync(searchEntity);
       }
-      catch(Exception ex)
+      catch (Exception)
       {
 
       }
@@ -127,16 +126,66 @@ namespace LinkRetrieval.API.Controllers
         });
       }
 
+      if (searchRequest.SearchDepth > 1)
+      {
+        await DeepScanFindResults(searchEntity, searchRequest.RegexPattern, searchRequest.SearchDepth, 0);
+      }
+
       return Ok(new { results = matchResultDtos });
-      //try
-      //{
-      //  //await _searchService.CreateSearchAsync(search);
-      //  return Ok();
-      //}
-      //catch (Exception ex)
-      //{
-      //  return StatusCode(500, $"Internal Server Error: {ex.ToString()}");
-      //}
+    }
+
+    private async Task<bool> DeepScanFindResults(Search search, string regexPattern, int scanDepth, int currentDepth)
+    {
+      var client = _clientFactory.CreateClient();
+      Regex regex = new Regex(regexPattern);
+      for (var depthLevel = currentDepth; depthLevel < scanDepth; depthLevel++)
+      {
+
+        foreach (var item in search.MatchResults)
+        {
+          try
+          {
+            var searchRequest = item.Search;
+            string htmlContent = await client.GetStringAsync(item.MatchedText);
+            var matches = regex.Matches(htmlContent);
+            var matchResults = new List<MatchResult>();
+            foreach (Match match in matches)
+            {
+              matchResults.Add(new MatchResult
+              {
+                MatchedText = match.Value,
+                StartIndex = match.Index,
+                Length = match.Length
+              });
+            }
+
+            var searchEntity = new Search
+            {
+              Url = item.MatchedText,
+              RegexPattern = regexPattern,
+              HtmlContent = htmlContent,
+              SearchTime = DateTime.Now,
+              MatchResults = matchResults
+            };
+
+            try
+            {
+              await _searchService.CreateSearchAsync(searchEntity);
+            }
+            catch (Exception)
+            {
+
+            }
+
+            await DeepScanFindResults(searchEntity, regexPattern, scanDepth, depthLevel + 1);
+          }
+          catch (Exception)
+          {
+            return false;
+          }
+        }
+      }
+      return true;
     }
   }
 }
