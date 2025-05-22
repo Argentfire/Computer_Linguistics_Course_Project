@@ -1,0 +1,31 @@
+#search-result-details {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem; // Optional: adds space between the cards
+}
+
+hr {
+  height: 2px;
+  background-color: black;
+}
+
+.search-result-matches-container {
+  display: flex;
+
+  flex-direction: column;
+  align-items: center;
+  padding-top: 10px;
+  gap: 20px;
+  label {
+    font-size: 28px;
+    font-weight: bold;
+    color: black;
+  }
+
+  .match-results-table {
+    tr:hover {
+      cursor: pointer;
+      background-color: #4e4343;
+    }
+  }
+}

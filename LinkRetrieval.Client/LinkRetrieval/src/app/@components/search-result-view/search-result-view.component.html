@@ -1,1 +1,47 @@
-<p>search-result-view works!</p>
+<div id="search-result-view">
+  <div id="search-result-details">
+    <app-detail-card id="search-result-url" [icon]="'url'" [title]="'URL'" [content]="searchResult.url"
+      [isNonInteractive]="true">
+    </app-detail-card>
+
+    <app-detail-card id="search-result-regex" [icon]="'regex'" [title]="'Regex'" [content]="searchResult.regexPattern"
+      [isNonInteractive]="true">
+    </app-detail-card>
+
+    <app-detail-card id="search-result-html" [icon]="'html'" [title]="'HTML Content'"
+      [content]="searchResult.htmlContent" [isNonInteractive]="false">
+    </app-detail-card>
+
+    <app-detail-card id="search-result-search-time" [icon]="'date'" [title]="'Search Time'"
+      [content]="searchResult.searchTime" [isNonInteractive]="true">
+    </app-detail-card>
+  </div>
+  <hr>
+  <section class="search-result-matches-container">
+    <label>Match Results</label>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 match-results-table">
+      <ng-container matColumnDef="matchedText">
+        <th mat-header-cell *matHeaderCellDef> Matched Text </th>
+        <td mat-cell *matCellDef="let searchResult"> {{searchResult.matchedText}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="startIndex">
+        <th mat-header-cell *matHeaderCellDef> Start Index </th>
+        <td mat-cell *matCellDef="let searchResult"> {{searchResult.startIndex}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="length">
+        <th mat-header-cell *matHeaderCellDef> Length </th>
+        <td mat-cell *matCellDef="let searchResult"> {{searchResult.length}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="searchId">
+        <th mat-header-cell *matHeaderCellDef> Search ID </th>
+        <td mat-cell *matCellDef="let searchResult"> {{searchResult.searchId}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </section>
+</div>
