@@ -12,6 +12,7 @@ import { NavigationComponent } from './@components/navigation/navigation.compone
 import { SearchFormComponent } from './@components/search-form/search-form.component';
 import { SearchHistoryComponent } from './@components/search-history/search-history.component';
 import { SearchResultViewComponent } from './@components/search-result-view/search-result-view.component';
+import { DetailCardComponent } from './@components/details/detail-card/detail-card.component';
 
 @NgModule({
   bootstrap: [AppComponent],
@@ -20,7 +21,8 @@ import { SearchResultViewComponent } from './@components/search-result-view/sear
     NavigationComponent,
     SearchFormComponent,
     SearchHistoryComponent,
-    SearchResultViewComponent
+    SearchResultViewComponent,
+    DetailCardComponent
   ],
   imports: [
     AppRoutingModule,
