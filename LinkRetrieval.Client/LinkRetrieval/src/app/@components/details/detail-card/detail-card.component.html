@@ -1,0 +1,32 @@
+<div id="detail-card-container">
+  <section id="card-header">
+    <img id="card-icon" [src]="'assets/icons/' + icon + '.png'" [alt]="icon + '.png'" />
+    <label class="header-title-label">{{title}}</label>
+  </section>
+  <section id="card-content">
+    <button class="content-button" mat-stroked-button [hidden]="isNonInteractive" (click)="showHTMLContentModal()">Show
+      HTML Content</button>
+    <label class="content-label" [hidden]="!isNonInteractive">{{content}}</label>
+  </section>
+</div>
+
+
+<dialog #htmlViewDialog class="html-view-dialog">
+  <div class="dialog-content">
+    <button class="close-button" mat-stroked-button (click)="htmlViewDialog.close()">Close</button>
+
+    <div class="html-view-sections">
+      <aside id="html-view-raw" class="html-view-section">
+        <p class="section-title">Raw HTML Content</p>
+        <hr>
+        <p>{{content}}</p>
+      </aside>
+      <aside id="html-view-compiled" class="html-view-section">
+        <p class="section-title">Compiled HTML Content</p>
+        <hr>
+        <div class="viewer" [innerHTML]="content"></div>
+      </aside>
+    </div>
+
+  </div>
+</dialog>
