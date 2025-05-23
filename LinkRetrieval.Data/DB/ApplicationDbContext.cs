@@ -5,11 +5,17 @@ namespace LinkRetrieval.Data.DB
 {
   public partial class ApplicationDbContext : DbContext
   {
+    /// <summary>
+    /// Default constructor for ApplicationDbContext.
+    /// </summary>
     public ApplicationDbContext()
     {
 
     }
 
+    /// <summary>
+    /// Constructor for ApplicationDbContext which initializes the DbContext with the provided options.
+    /// </summary>
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
     {
       try
@@ -25,6 +31,9 @@ namespace LinkRetrieval.Data.DB
     public virtual DbSet<Search> Searches { get; set; }
     public virtual DbSet<MatchResult> MatchResults { get; set; }
 
+    /// <summary>
+    /// Configures the database connection and options for the DbContext.
+    /// </summary>
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
       if (!optionsBuilder.IsConfigured)
@@ -39,6 +48,9 @@ namespace LinkRetrieval.Data.DB
       optionsBuilder.EnableSensitiveDataLogging();
     }
 
+    /// <summary>
+    /// Configures the model for the DbContext.
+    /// </summary>
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
       OnModelCreatingPartial(modelBuilder);

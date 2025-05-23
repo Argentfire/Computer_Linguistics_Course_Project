@@ -14,6 +14,13 @@ namespace LinkRetrieval.API.Controllers
     private readonly ApplicationDbContext _db;
     private readonly IHttpClientFactory _clientFactory;
 
+
+    /// <summary>
+    /// Constructor for LinkRetrievalController which initializes the IHttpClientFactory, ISearchService, and ApplicationDbContext private fields.
+    /// </summary>
+    /// <param name="clientFactory"></param>
+    /// <param name="searchService"></param>
+    /// <param name="db"></param>
     public LinkRetrievalController(IHttpClientFactory clientFactory, ISearchService searchService, ApplicationDbContext db)
     {
       _clientFactory = clientFactory;
@@ -21,6 +28,15 @@ namespace LinkRetrieval.API.Controllers
       _db = db;
     }
 
+    /// <summary>
+    /// HTTP GET method to retrieve all searches from the database.
+    /// </summary>
+    /// <returns>
+    /// Returns a status code based on the result of the algorithm.
+    /// Possible status codes:
+    /// 200 - Success(OK method) containing the list of searches.
+    /// 500 - Internal Server Error containing the caugh exception.
+    /// </returns>
     [HttpGet]
     [Route("GetSearches")]
     public async Task<IActionResult> GetSearches()
@@ -36,6 +52,16 @@ namespace LinkRetrieval.API.Controllers
       }
     }
 
+    /// <summary>
+    /// HTTP GET method to retrieve a specific search by its ID.
+    /// </summary>
+    /// <param name="id">ID of the item</param>
+    /// <returns>Returns a status code based on the result of the algorithm.
+    /// Possible status codes:
+    /// 200 - Success(OK method) containing the search with the specified ID.
+    /// 404 - Not Found if the an item with the specified ID does not exist.
+    /// 500 - Internal Server Error containing the caugh exception.
+    /// </returns>
     [HttpGet]
     [Route("GetSearch/{id}")]
     public async Task<IActionResult> GetSearch(Guid id)
@@ -55,6 +81,17 @@ namespace LinkRetrieval.API.Controllers
       }
     }
 
+    /// <summary>
+    /// HTTP POST method to add a new search. This is the method that will be called when the user submits the search form.
+    /// It performs the base functionality on which this project has been built - scraping a web page and searching for a regular expression.
+    /// </summary>
+    /// <param name="searchRequest">A DTO from "SearchReceiveNode" type containing the object on which the request is to be processed</param>
+    /// <returns>Returns a status code based on the result of the algorithm.
+    /// Possible staus codes:
+    /// 200 - Success(OK method) containing a collection(List) of DTO from "MatchResultDto" type. The list contains the found matches for the specified regular expression on level 1 depth.
+    /// 400 - Bad Request if the URL or regular expression is invalid or if an error occurs while retrieving the HTML content.
+    /// 500 - Internal Server Error if an error occurs while executing the method.
+    /// </returns>
     [HttpPost]
     [Route("AddSearch")]
     public async Task<IActionResult> AddSearch([FromBody] SearchReceiveNode searchRequest)
@@ -134,6 +171,14 @@ namespace LinkRetrieval.API.Controllers
       return Ok(new { results = matchResultDtos });
     }
 
+    /// <summary>
+    /// A recursive method that performs a deep scan of the HTML content on specified depth to find matches for the specified regular expression.
+    /// </summary>
+    /// <param name="search">Reference to the created search object from the "AddSearch" HTTP GET method</param>
+    /// <param name="regexPattern">Reference to the used regular expression from the initial search</param>
+    /// <param name="scanDepth">Level of the depth at which the deep scan is to be performed</param>
+    /// <param name="currentDepth">The level of depth at which the method is being called from</param>
+    /// <returns>Returns a boolean value based on the successful execution of the method</returns>
     private async Task<bool> DeepScanFindResults(Search search, string regexPattern, int scanDepth, int currentDepth)
     {
       var client = _clientFactory.CreateClient();
