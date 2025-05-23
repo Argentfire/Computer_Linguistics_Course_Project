@@ -147,9 +147,9 @@ namespace LinkRetrieval.API.Controllers
       {
         await _searchService.CreateSearchAsync(searchEntity);
       }
-      catch (Exception)
+      catch (Exception ex)
       {
-
+        return StatusCode(500, $"Internal Server Error: {ex.Message}");
       }
 
       var matchResultDtos = new List<MatchResultDto>();
