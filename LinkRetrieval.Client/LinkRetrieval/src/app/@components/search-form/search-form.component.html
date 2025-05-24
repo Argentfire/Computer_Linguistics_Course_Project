@@ -16,7 +16,7 @@
       <input id="warning-checkbox-input" type="checkbox" [(ngModel)]="warningAccepted">
       <label id="warning-checkbox-label" for="warning-checkbox-input">I accept the warning</label>
     </div>
-    <button mat-stroked-button (click)="sendSearchRequest()">Send Request</button>
+    <button id="send-request-button" class="search-form-button" mat-stroked-button (click)="sendSearchRequest()">Send Request</button>
   </section>
 
   <section id="section-result" class="search-form-section" [hidden]="!resultVisible">
