@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.12.35527.113
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Course_Project", "Course_Project\Course_Project.csproj", "{6826EF14-83FE-4CA4-A54C-FCAA24F99886}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkRetrieval.PoC", "Course_Project\LinkRetrieval.PoC.csproj", "{6826EF14-83FE-4CA4-A54C-FCAA24F99886}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkRetrieval.API", "LinkRetrieval.API\LinkRetrieval.API.csproj", "{775F8575-8B7B-4F93-8071-5AFED20DD327}"
 EndProject
